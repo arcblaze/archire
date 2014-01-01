@@ -17,6 +17,7 @@ CREATE TABLE users (
                                 (START WITH 1, INCREMENT BY 1) NOT NULL PRIMARY KEY,
     login          VARCHAR(32)  NOT NULL,
     hashed_pass    VARCHAR(128) NOT NULL,
+    salt           VARCHAR(16)  NOT NULL,
     email          VARCHAR_IGNORECASE(255) NOT NULL,
     first_name     VARCHAR(50)  NOT NULL,
     last_name      VARCHAR(50)  NOT NULL,

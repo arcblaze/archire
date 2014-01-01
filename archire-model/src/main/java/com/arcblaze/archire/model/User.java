@@ -42,6 +42,11 @@ public class User implements Comparable<User>, Principal {
 	private String hashedPass;
 
 	/**
+	 * The salt value used when hashing the user's password.
+	 */
+	private String salt;
+
+	/**
 	 * The user's email address.
 	 */
 	private String email;
@@ -156,6 +161,32 @@ public class User implements Comparable<User>, Principal {
 			throw new IllegalArgumentException("Invalid blank hashed password");
 
 		this.hashedPass = StringUtils.trim(hashedPass);
+		return this;
+	}
+
+	/**
+	 * @return the password salt value used when hashing the user's password
+	 */
+	@XmlElement
+	public String getSalt() {
+		return this.salt;
+	}
+
+	/**
+	 * @param salt
+	 *            the new password salt value used when hashing the user's
+	 *            password
+	 * 
+	 * @return {@code this}
+	 * 
+	 * @throws IllegalArgumentException
+	 *             if the provided password salt value is invalid
+	 */
+	public User setSalt(String salt) {
+		if (StringUtils.isBlank(salt))
+			throw new IllegalArgumentException("Invalid blank salt");
+
+		this.salt = StringUtils.trim(salt);
 		return this;
 	}
 
@@ -382,6 +413,7 @@ public class User implements Comparable<User>, Principal {
 		builder.append("id", getId());
 		builder.append("login", getLogin());
 		builder.append("hashedPass", getHashedPass());
+		builder.append("salt", getSalt());
 		builder.append("email", getEmail());
 		builder.append("firstName", getFirstName());
 		builder.append("lastName", getLastName());
@@ -400,7 +432,7 @@ public class User implements Comparable<User>, Principal {
 			EqualsBuilder builder = new EqualsBuilder();
 			builder.append(getId(), other.getId());
 			builder.append(getLogin(), other.getLogin());
-			// HashedPass is specifically left out.
+			// HashedPass and Salt specifically left out.
 			builder.append(getEmail(), other.getEmail());
 			builder.append(getFirstName(), other.getFirstName());
 			builder.append(getLastName(), other.getLastName());
@@ -419,7 +451,7 @@ public class User implements Comparable<User>, Principal {
 		HashCodeBuilder builder = new HashCodeBuilder();
 		builder.append(getId());
 		builder.append(getLogin());
-		// HashedPass is specifically left out.
+		// HashedPass and Salt specifically left out.
 		builder.append(getEmail());
 		builder.append(getFirstName());
 		builder.append(getLastName());
@@ -439,7 +471,7 @@ public class User implements Comparable<User>, Principal {
 		builder.append(getLogin(), other.getLogin());
 		builder.append(getId(), other.getId());
 		builder.append(getEmail(), other.getEmail());
-		// HashedPass is specifically left out.
+		// HashedPass and Salt specifically left out.
 		return builder.toComparison();
 	}
 }

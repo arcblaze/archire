@@ -15,6 +15,7 @@ CREATE TABLE IF NOT EXISTS users (
     `id`             INTEGER      NOT NULL PRIMARY KEY AUTO_INCREMENT,
     `login`          VARCHAR(32)  NOT NULL,
     `hashed_pass`    VARCHAR(128) NOT NULL,
+    `salt`           VARCHAR(16)  NOT NULL,
     -- Treat emails as case-insensitive.
     `email`          VARCHAR(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
     `first_name`     VARCHAR(50)  NOT NULL,
