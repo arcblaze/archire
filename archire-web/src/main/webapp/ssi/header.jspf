@@ -1,0 +1,21 @@
+
+<div id="header-container">
+  <div id="header">
+    <div id="header-logo">
+      <a href="/user/index.jsp">
+        <img src="/img/logo.png" border="0"
+             alt="ArcHire" title="ArcHire"/></a>
+    </div>
+
+    <div id="header-navigation">
+      <% if (request.getRemoteUser() != null) { %>
+        <a href="/user/index.jsp">Home</a>
+        <a href="/user/profile.jsp">Profile</a>
+        <a href="/logout.jsp">Logout</a>
+      <% } else { %>
+        &nbsp;
+      <% } %>
+    </div>
+  </div>
+</div>
+

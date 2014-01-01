@@ -1,1 +1,7 @@
-target/
+target
+work
+logs
+.project
+.settings
+*.swp
+*.log
